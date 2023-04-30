@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/Pixilart Sprite Sheet (25).png" type="Texture" id=2]
+[ext_resource path="res://scenes/citizen.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/nxt lvl 1.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 66, 386 )
+
+[node name="train" type="Node2D"]
+
+[node name="Sprite3" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 5822, 312.5 )
+scale = Vector2( 0.274219, 1.23194 )
+texture = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2178.5, 1080 )
+scale = Vector2( 1.73848, 1 )
+texture = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( -702, 385 )
+scale = Vector2( 0.274219, 1 )
+texture = ExtResource( 2 )
+
+[node name="bg" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="citizen3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 3848, 445 )
+
+[node name="citizen2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 2408, 443 )
+
+[node name="citizen" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1764, 444 )
+
+[node name="player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 211, 501 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="KinematicBody2D"]
+position = Vector2( 5075, 391 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="KinematicBody2D/Area2D"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 56, 376 )
+shape = SubResource( 1 )
+
+[connection signal="area_entered" from="KinematicBody2D/Area2D" to="KinematicBody2D/Area2D" method="_on_Area2D_area_entered"]

@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/citizen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sprites/anotha one.png" type="Texture" id=3]
+[ext_resource path="res://scripts/nxtlvl2.gd" type="Script" id=4]
+[ext_resource path="res://sprites/pixil-frame-0 - 2023-04-29T083710.429.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 97.5, 413.5 )
+
+[node name="street" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+centered = false
+
+[node name="citizen" parent="." instance=ExtResource( 1 )]
+position = Vector2( 976, 480 )
+
+[node name="citizen2" parent="." instance=ExtResource( 1 )]
+visible = false
+position = Vector2( 1453, 486 )
+
+[node name="citizen3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 2613, 478 )
+
+[node name="citizen4" parent="." instance=ExtResource( 1 )]
+visible = false
+position = Vector2( 2135, 474 )
+
+[node name="citizen5" parent="." instance=ExtResource( 1 )]
+position = Vector2( 3403, 466 )
+
+[node name="citizen6" parent="." instance=ExtResource( 1 )]
+visible = false
+position = Vector2( 3883, 474 )
+
+[node name="citizen7" parent="." instance=ExtResource( 1 )]
+position = Vector2( 4478, 489 )
+
+[node name="citizen8" parent="." instance=ExtResource( 1 )]
+position = Vector2( 5473, 483 )
+
+[node name="player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 221, 509 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+position = Vector2( 976, 480 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( -951.5, -106.5 )
+shape = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="KinematicBody2D"]
+position = Vector2( -976, -480 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="KinematicBody2D/Area2D"]
+position = Vector2( 6376, 333 )
+shape = SubResource( 1 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 2295, 1271 )
+scale = Vector2( 5.68984, 1 )
+texture = ExtResource( 5 )
+offset = Vector2( 200.621, -191 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( -1182.92, 1714.51 )
+scale = Vector2( 1.4072, 2.95556 )
+texture = ExtResource( 5 )
+offset = Vector2( 200.621, -191 )
+
+[node name="Sprite4" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 6632.73, 894.036 )
+scale = Vector2( 0.529688, 3.23056 )
+texture = ExtResource( 5 )
+offset = Vector2( 200.621, -191 )
+
+[connection signal="area_entered" from="KinematicBody2D/Area2D" to="KinematicBody2D/Area2D" method="_on_Area2D_area_entered"]

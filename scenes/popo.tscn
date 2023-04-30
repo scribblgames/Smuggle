@@ -1,0 +1,119 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://sprites/Pixilart Sprite Sheet (33).png" type="Texture" id=1]
+[ext_resource path="res://scripts/lookersee.gd" type="Script" id=2]
+[ext_resource path="res://scripts/changingaggro.gd" type="Script" id=3]
+[ext_resource path="res://scripts/right.gd" type="Script" id=5]
+[ext_resource path="res://scripts/left.gd" type="Script" id=6]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 1280, 0, 320, 320 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 1600, 0, 320, 320 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 2240, 0, 320, 320 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 1920, 0, 320, 320 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 320, 320 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 320, 0, 320, 320 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 640, 0, 320, 320 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 960, 0, 320, 320 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 2560, 0, 320, 320 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 2880, 0, 320, 320 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 3200, 0, 320, 320 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 3520, 0, 320, 320 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 4 ), SubResource( 3 ), SubResource( 3 ), SubResource( 3 ) ],
+"loop": false,
+"name": "down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 7 ), SubResource( 7 ) ],
+"loop": false,
+"name": "left",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 11 ), SubResource( 11 ) ],
+"loop": false,
+"name": "right",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 81.5, 110.75 )
+
+[sub_resource type="CapsuleShape2D" id=15]
+
+[node name="popo" type="KinematicBody2D"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 13 )
+animation = "left"
+frame = 5
+speed_scale = 3.0
+playing = true
+script = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( -1, 2 )
+
+[node name="down" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 1, 1 )
+shape = SubResource( 14 )
+disabled = true
+script = ExtResource( 3 )
+
+[node name="down2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -222, 11 )
+shape = SubResource( 14 )
+script = ExtResource( 6 )
+
+[node name="down3" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 211, 11 )
+shape = SubResource( 14 )
+disabled = true
+script = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 15 )
+disabled = true
+
+[connection signal="animation_finished" from="AnimatedSprite" to="AnimatedSprite" method="_on_AnimatedSprite_animation_finished"]
+[connection signal="animation_finished" from="AnimatedSprite" to="Area2D/down" method="_on_AnimatedSprite_animation_finished"]
+[connection signal="frame_changed" from="AnimatedSprite" to="AnimatedSprite" method="_on_AnimatedSprite_frame_changed"]
+[connection signal="frame_changed" from="AnimatedSprite" to="Area2D/down" method="_on_AnimatedSprite_frame_changed"]
+[connection signal="area_entered" from="Area2D" to="Area2D" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Area2D" to="Area2D" method="_on_Area2D_area_exited"]
